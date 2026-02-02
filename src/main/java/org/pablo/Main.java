@@ -1,9 +1,9 @@
 package org.pablo;
 
-import org.pablo.Modelo.Artista;
-import org.pablo.Modelo.ExtraerDatosAPI;
-import org.pablo.Modelo.MongoDB;
-import org.pablo.Modelo.SQL_DB;
+import org.pablo.mongo.Modelo.Artista;
+import org.pablo.api.ExtraerDatosAPI;
+import org.pablo.mongo.MongoDB;
+import org.pablo.sql.SQL_DB;
 
 import java.util.ArrayList;
 

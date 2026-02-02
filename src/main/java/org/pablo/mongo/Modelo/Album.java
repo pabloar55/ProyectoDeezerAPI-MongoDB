@@ -1,4 +1,4 @@
-package org.pablo.Modelo;
+package org.pablo.mongo.Modelo;
 
 public class Album {
     private Long id;

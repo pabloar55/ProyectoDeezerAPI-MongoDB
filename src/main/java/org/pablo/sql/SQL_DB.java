@@ -1,4 +1,7 @@
-package org.pablo.Modelo;
+package org.pablo.sql;
+
+import org.pablo.mongo.Modelo.Album;
+import org.pablo.mongo.Modelo.Artista;
 
 import java.sql.*;
 import java.util.ArrayList;

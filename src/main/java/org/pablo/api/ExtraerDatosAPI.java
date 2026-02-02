@@ -1,7 +1,9 @@
-package org.pablo.Modelo;
+package org.pablo.api;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.pablo.mongo.Modelo.Album;
+import org.pablo.mongo.Modelo.Artista;
 
 import java.io.IOException;
 import java.net.URI;

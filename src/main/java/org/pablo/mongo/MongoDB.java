@@ -1,4 +1,4 @@
-package org.pablo.Modelo;
+package org.pablo.mongo;
 
 import com.mongodb.MongoBulkWriteException;
 import com.mongodb.MongoClientSettings;
@@ -10,6 +10,8 @@ import com.mongodb.client.model.InsertManyOptions;
 import org.bson.codecs.configuration.CodecRegistries;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
+import org.pablo.mongo.Modelo.Album;
+import org.pablo.mongo.Modelo.Artista;
 
 import java.util.ArrayList;
 
