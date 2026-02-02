@@ -43,7 +43,7 @@ public class MongoDB {
             collectionAlbumes.insertMany(listaAlbums, options);
 
         } catch (MongoBulkWriteException e) {
-            System.out.println("Aviso: Algunos artistas ya existían o hubo un error parcial.");
+            System.out.println("Aviso: Algunos artistas ya existían.");
         }
     }
 }
