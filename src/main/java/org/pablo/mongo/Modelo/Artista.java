@@ -1,8 +1,11 @@
 package org.pablo.mongo.Modelo;
 
+import org.bson.codecs.pojo.annotations.BsonId;
+
 import java.util.ArrayList;
 
 public class Artista {
+    @BsonId
     private Long id;
     private String nombre;
     private ArrayList<Album> albumes;
@@ -41,6 +44,16 @@ public class Artista {
     }
     @Override
     public String toString() {
-        return "Artista: " + nombre + "\n"+"Álbumes: " + albumes.toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append("Nombre: ").append(nombre).append("\n");
+        sb.append("------------------------------\n");
+        sb.append("Albumes:\n");
+
+        if (albumes != null && !albumes.isEmpty()) {
+            for (Album album : albumes) {
+                sb.append(" • ").append(album.getNombre()).append("\n");
+            }
+        }
+        return sb.toString();
     }
 }

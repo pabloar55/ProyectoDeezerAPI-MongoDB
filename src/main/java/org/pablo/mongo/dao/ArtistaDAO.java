@@ -2,6 +2,7 @@ package org.pablo.mongo.dao;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.ReplaceOptions;
 import com.mongodb.client.result.DeleteResult;
 import org.bson.conversions.Bson;
 import org.pablo.mongo.Modelo.Artista;
@@ -24,7 +25,7 @@ public class ArtistaDAO {
 
     public List<Artista> obtenerArtistasConLookup() {
         List<Artista> resultados = new ArrayList<>();
-        Bson lookupStage = lookup("albumes", "id", "idArtista", "albumes");
+        Bson lookupStage = lookup("albumes", "_id", "idArtista", "albumes");
         collectionArtista.aggregate(List.of(lookupStage))
                 .into(resultados);
 
@@ -32,15 +33,19 @@ public class ArtistaDAO {
     }
 
     public void guardar(Artista artista) {
-        collectionArtista.insertOne(artista);
+        collectionArtista.replaceOne(
+                eq("_id", artista.getId()),
+                artista,
+                new ReplaceOptions().upsert(true)
+        );
     }
 
     public boolean eliminarArtista(Long id) {
-        DeleteResult result = collectionArtista.deleteOne(eq("id", id));
+        DeleteResult result = collectionArtista.deleteOne(eq("_id", id));
         return result.getDeletedCount() > 0;
     }
 
     public void modificarArtista(Artista artista) {
-        collectionArtista.replaceOne(eq("id", artista.getId()), artista);
+        collectionArtista.replaceOne(eq("_id", artista.getId()), artista);
     }
 }

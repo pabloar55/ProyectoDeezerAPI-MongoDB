@@ -43,6 +43,7 @@ public class Vista extends javax.swing.JFrame {
                 }
                 SQL_DB sqlDB = new SQL_DB();
                 sqlDB.migrarDatosASQL(artistas);
+                JOptionPane.showMessageDialog(null, "Migración completada");
             }
         });
 
@@ -63,7 +64,7 @@ public class Vista extends javax.swing.JFrame {
                 MongoDB db = new MongoDB();
                 artistas = api.getArtistas();
                 db.insertarVariosArtistasAlbumes(artistas);
-                System.out.println("insertados");
+                JOptionPane.showMessageDialog(null, "Artistas de prueba insertados");
             }
         });
         buscar.addActionListener(new ActionListener() {
@@ -87,7 +88,11 @@ public class Vista extends javax.swing.JFrame {
 
                     if (eliminado) {
                         JOptionPane.showMessageDialog(null, "Artista eliminado de Mongo");
+                    }else {
+                        JOptionPane.showMessageDialog(null, "El artista no existe en la base de datos");
                     }
+                }else {
+                    JOptionPane.showMessageDialog(null, "Primero busca un artista");
                 }
             }
         });
@@ -96,13 +101,14 @@ public class Vista extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 MongoDB db = new MongoDB();
                 if (buscado != null) {
-
                     String nuevoNombre = JOptionPane.showInputDialog("Nuevo nombre:", buscado.getNombre());
                     if (nuevoNombre != null) {
                         buscado.setNombre(nuevoNombre);
                         db.getArtistaDAO().modificarArtista(buscado);
                         JOptionPane.showMessageDialog(null, "Artista actualizado");
                     }
+                }else {
+                    JOptionPane.showMessageDialog(null, "Primero busca un artista");
                 }
             }
         });
@@ -121,9 +127,13 @@ public class Vista extends javax.swing.JFrame {
         insertarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (buscado == null) {
+                    JOptionPane.showMessageDialog(null, "Primero busca un artista");
+                    return;
+                }
                 MongoDB mongo = new MongoDB();
                 mongo.getArtistaDAO().guardar(buscado);
-                System.out.println("insertado");
+                JOptionPane.showMessageDialog(null, "Artista insertado");
             }
         });
     }
