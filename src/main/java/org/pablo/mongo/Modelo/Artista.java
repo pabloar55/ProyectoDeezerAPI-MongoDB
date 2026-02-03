@@ -13,6 +13,9 @@ public class Artista {
         this.albumes = albumes;
     }
 
+    public Artista() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -38,6 +41,6 @@ public class Artista {
     }
     @Override
     public String toString() {
-        return "Artista: " + nombre + " (ID: " + id + ") | Álbumes: " + albumes;
+        return "Artista: " + nombre + "\n"+"Álbumes: " + albumes.toString();
     }
 }

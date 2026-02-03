@@ -12,18 +12,21 @@ import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import org.pablo.mongo.Modelo.Album;
 import org.pablo.mongo.Modelo.Artista;
+import org.pablo.mongo.dao.ArtistaDAO;
 
 import java.util.ArrayList;
 
 public class MongoDB {
     private final MongoClient cliente = MongoClients.create("mongodb://localhost:27017");
     private MongoDatabase bd_musica;
+    private ArtistaDAO artistaDAO;
     public MongoDB(){
         PojoCodecProvider pojo = PojoCodecProvider.builder().automatic(true).build();
 
         CodecRegistry codec = CodecRegistries.fromRegistries(MongoClientSettings.getDefaultCodecRegistry(), CodecRegistries.fromProviders(pojo));
 
         bd_musica = cliente.getDatabase("bd_musica").withCodecRegistry(codec);
+        this.artistaDAO = new ArtistaDAO(bd_musica);
     }
     public void insertarVariosArtistasAlbumes(ArrayList<Artista> listaArtistas) {
         if (listaArtistas == null || listaArtistas.isEmpty()) {
@@ -47,5 +50,9 @@ public class MongoDB {
         } catch (MongoBulkWriteException e) {
             System.out.println("Aviso: Algunos artistas ya existían.");
         }
+    }
+
+    public ArtistaDAO getArtistaDAO() {
+        return artistaDAO;
     }
 }

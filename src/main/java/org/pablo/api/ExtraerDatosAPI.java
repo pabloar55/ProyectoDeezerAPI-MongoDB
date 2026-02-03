@@ -72,7 +72,7 @@ public class ExtraerDatosAPI {
     public void mostrarAlbumesArtistas() {
           for (Artista a : artistas) {
               System.out.println(a.toString());
-        }
+          }
     }
 
     public ArrayList<Artista> getArtistas() {
